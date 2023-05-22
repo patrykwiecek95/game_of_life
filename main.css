@@ -1,0 +1,41 @@
+.button-start{
+    box-sizing: border-box;
+    background-color: transparent;
+    border: 2px solid #F1C40F;
+    border-radius: 10px;
+    color: #F1C40F;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    margin: 20px;
+    padding: 1.2em 2.8em;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+.button-start a{
+    color: #F1C40F;
+}
+.button-start:hover a,.button-end:hover a, .button-ranking:hover a, .button-restart:hover a, .button-quit:hover a {
+    color: #fff;
+    outline: 0;
+}
+.first {
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+.first:hover {
+    box-shadow: 0 0 40px 40px #F1C40F inset;
+}
+
+
+
+.dead {
+    height: 40px;
+    width: 40px;
+    background-color: gray;
+}
+.alive{
+    height: 40px;
+    width: 40px;
+    background-color: aqua;
+}
