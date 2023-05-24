@@ -12,9 +12,11 @@ const createBoard = (rows, cells) => {
         for (let j = 1; j <= cells; j++) {
             const cell = document.createElement("div");
             count +=1
-            cell.innerText = `${count}`
+            // cell.innerText = `${count}`
+            cell.innerText = `${i},${j}`
             cell.id = `${count}`;
-            cell.setAttribute("data-row", j);
+            cell.setAttribute("data-row", i);
+            cell.setAttribute("data-cell", j);
             cell.classList.add("dead");
             row.appendChild(cell);
         }
@@ -24,7 +26,7 @@ const createBoard = (rows, cells) => {
 };
 
 const gameBoardHtml = document.querySelector(".game-border");
-const board = createBoard(10, 10);
+const board = createBoard(8, 8);
 gameBoardHtml.appendChild(board);
 
 
@@ -39,43 +41,81 @@ function clickCard(element) {
     if (aliveCardsBox.includes(number)) {
         return;
     }
-    // aliveCard.className.add('alive');
     aliveCard.classList.replace("dead", "alive");
     aliveCardsBox.push(number)
-
 }
 
 function startGame() {
     const newCardBox  = [...cards]
+    const cardToBeAlive = []
+    const cardToBeDead = []
     newCardBox.forEach(card => {
-        const numberRow = card.dataset.row;
+        let score = 0;
+        const numberRow =parseInt(card.dataset.row);
+        const numberCell = parseInt(card.dataset.cell);
+        let number1 = `[data-row="${numberRow-1}"][data-cell="${numberCell-1}"]`;
+        let number2 = `[data-row="${numberRow-1}"][data-cell="${numberCell}"]`;
+        let number3 = `[data-row="${numberRow-1}"][data-cell="${numberCell+1}"]`;
+        let number4 = `[data-row="${numberRow}"][data-cell="${numberCell-1}"]`;
+        let number5 = `[data-row="${numberRow}"][data-cell="${numberCell+1}"]`;
+        let number6 = `[data-row="${numberRow+1}"][data-cell="${numberCell-1}"]`
+        let number7 = `[data-row="${numberRow+1}"][data-cell="${numberCell}"]`
+        let number8 = `[data-row="${numberRow+1}"][data-cell="${numberCell+1}"]`
 
-        let idCard = parseInt(card.id);
-        let number1 = (idCard - idFactor - 1).toString();
-        let number2 = (idCard - idFactor).toString();
-        let number3 = (idCard - idFactor + 1).toString();
-        let number4 = (idCard - 1).toString();
-        let number5 = (idCard + 1).toString();
-        let number6 = (idCard + idFactor - 1).toString();
-        let number7 = (idCard + idFactor).toString();
-        let number8 = (idCard + idFactor + 1).toString();
+        let card1 = document.querySelector(number1);
+        let card2 = document.querySelector(number2);
+        let card3 = document.querySelector(number3);
+        let card4 = document.querySelector(number4);
+        let card5 = document.querySelector(number5);
+        let card6 = document.querySelector(number6);
+        let card7 = document.querySelector(number7);
+        let card8 = document.querySelector(number8);
 
-        if (card.className === "alive") {
-            console.log(numberRow)
-            console.log(document.getElementById(number1))
-            console.log(document.getElementById(number2))
-            console.log(document.getElementById(number3))
-            console.log(document.getElementById(number4))
-            console.log(document.getElementById(number5))
-            console.log(document.getElementById(number6))
-            console.log(document.getElementById(number7))
-            console.log(document.getElementById(number8))
+        if (card1 && card1.className === "alive") {
+            score +=1;
         }
+        if (card2 && card2.className === "alive") {
+            score +=1;
+        }
+        if (card3 && card3.className === "alive") {
+            score +=1;
+        }
+        if (card4 && card4.className === "alive") {
+            score +=1;
+        }
+        if (card5 && card5.className === "alive") {
+            score +=1;
+        }
+        if (card6 && card6.className === "alive") {
+            score +=1;
+        }
+        if (card7 && card7.className === "alive") {
+            score +=1;
+        }
+        if (card8 && card8.className === "alive") {
+            score +=1;
+        }
+        if ((card.className === "alive" && score >= 2 && score <= 3) || (card.className === "dead" && score === 3)){
+            console.log("score: ",score)
+            cardToBeAlive.push(card)
+        } else {
+            cardToBeDead.push(card)
+        }
+
     })
+    console.log(newCardBox)
+    console.log(cards)
+    console.log("to be alive:",cardToBeAlive)
+    console.log("to be dead:",cardToBeDead)
+
+    cardToBeAlive.forEach(card => {
+        card.classList.replace("dead", "alive")
+    })
+    cardToBeDead.forEach(card => {
+        card.classList.replace("alive","dead" )
+    })
+    setTimeout(startGame,2000);
 }
-
-
-
 
 cards.forEach(card => {
     card.addEventListener('click', clickCard);
