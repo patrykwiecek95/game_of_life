@@ -1,10 +1,10 @@
-.button-start{
+.button-start, .button-end{
     width: 300px;
     box-sizing: border-box;
     background-color: transparent;
-    border: 2px solid #F1C40F;
+    border: 2px solid gray;
     border-radius: 10px;
-    color: #F1C40F;
+    color: gray;
     cursor: pointer;
     font-size: 16px;
     line-height: 1;
@@ -14,10 +14,11 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
 }
-.button-start a{
-    color: #F1C40F;
+.button-start a, .button-end a{
+    color: gray;
+    text-decoration: none;
 }
-.button-start:hover a,.button-end:hover a, .button-ranking:hover a, .button-restart:hover a, .button-quit:hover a {
+.button-start:hover a, .button-end:hover a {
     color: #fff;
     outline: 0;
 }
@@ -25,7 +26,7 @@
     transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
 }
 .first:hover {
-    box-shadow: 0 0 40px 40px #F1C40F inset;
+    box-shadow: 0 0 40px 40px gray inset;
 }
 
 /*.board{*/
