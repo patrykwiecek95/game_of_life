@@ -1,37 +1,41 @@
-/*.button-start, .button-end{*/
-/*    width: 300px;*/
-/*    box-sizing: border-box;*/
-/*    background-color: transparent;*/
-/*    border: 2px solid gray;*/
-/*    border-radius: 10px;*/
-/*    color: gray;*/
-/*    cursor: pointer;*/
-/*    font-size: 16px;*/
-/*    line-height: 1;*/
-/*    margin: 20px;*/
-/*    padding: 1.2em 2.8em;*/
-/*    text-align: center;*/
-/*    font-family: 'Montserrat', sans-serif;*/
-/*    font-weight: 700;*/
-/*}*/
-/*.button-start a, .button-end a{*/
-/*    color: gray;*/
-/*    text-decoration: none;*/
-/*}*/
-/*.button-start:hover a, .button-end:hover a {*/
-/*    color: #fff;*/
-/*    outline: 0;*/
-/*}*/
-/*.first {*/
-/*    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;*/
-/*}*/
-/*.first:hover {*/
-/*    box-shadow: 0 0 40px 40px gray inset;*/
-/*}*/
+.button-start, .button-end{
+    width: 300px;
+    box-sizing: border-box;
+    background-color: transparent;
+    border: 2px solid gray;
+    border-radius: 10px;
+    color: gray;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    margin: 20px;
+    padding: 1.2em 2.8em;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+.button-start a, .button-end a{
+    color: gray;
+    text-decoration: none;
+}
+.button-start:hover a, .button-end:hover a {
+    color: #fff;
+    outline: 0;
+}
+.first {
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+.first:hover {
+    box-shadow: 0 0 40px 40px gray inset;
+}
 
-/*.board{*/
-/*    border: black 2px solid;*/
-/*}*/
+.delay_form p, .size_form p{
+    display: inline-block;
+    font-size: 22px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: black;
+}
 
 .row{
     display: flex;
@@ -39,13 +43,13 @@
 
 .dead {
     border: white 2px solid;
-    height: 30px;
-    width: 30px;
+    height: 20px;
+    width: 20px;
     background-color: gray;
 }
 .alive{
     border: white 2px solid;
-    height: 30px;
-    width: 30px;
+    height: 20px;
+    width: 20px;
     background-color: aqua;
 }

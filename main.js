@@ -11,7 +11,7 @@ let widthBoard = widthBoardInput.value;
 let board;
 let delayTime =delayTimeInput.value;
 let playCellBox;
-let stillPLay = true;
+let stillPLay;
 
 
 const createBoard = (rows, cells) => {
@@ -49,7 +49,6 @@ function setDelay(){
     delayTime = delayTimeInput.value
 }
 
-
 const cards = document.querySelectorAll('.dead');
 
 function clickCard(element) {
@@ -63,9 +62,14 @@ function clickCard(element) {
     }
 }
 function startGame() {
-    if(stillPLay) {
+        stillPLay =true;
         buttonStart.style.display = "none"
         buttonEnd.style.display = "block"
+        playGame()
+}
+
+function playGame(){
+    if(stillPLay) {
         playCellBox = [...cards]
         const cardToBeAlive = []
         const cardToBeDead = []
@@ -82,6 +86,8 @@ function startGame() {
             let number7 = `[data-row="${numberRow + 1}"][data-cell="${numberCell}"]`
             let number8 = `[data-row="${numberRow + 1}"][data-cell="${numberCell + 1}"]`
 
+            //-------------------------------------------------------------------------
+            // make it simpler
             // for (let i = 1; i <= 8; i++) {
             //     let element = number${i}
             //     let checkingCard = document.querySelector(element);
@@ -98,6 +104,7 @@ function startGame() {
             //     cardToBeDead.push(card);
             // }
             //-------------------------------------------------------------------------
+
             let card1 = document.querySelector(number1);
             let card2 = document.querySelector(number2);
             let card3 = document.querySelector(number3);
@@ -143,12 +150,8 @@ function startGame() {
         cardToBeDead.forEach(card => {
             card.classList.replace("alive", "dead")
         })
-        setTimeout(startGame, delayTime);
+        setTimeout(playGame, delayTime);
     }
-}
-
-function playGame(){
-
 }
 function endGame() {
     stillPLay = false;
