@@ -1,4 +1,13 @@
+const heightBoardInput = document.querySelector('.borderHeight')
+const widthBoardInput = document.querySelector('.borderWidth')
+const delayTimeInput = document.querySelector('.delay_time')
+const gameBoardHtml = document.querySelector(".game-border");
+
 let aliveCell;
+let heightBoard;
+let widthBoard;
+let delayTime =delayTimeInput.value;
+
 
 
 const createBoard = (rows, cells) => {
@@ -20,8 +29,28 @@ const createBoard = (rows, cells) => {
     return boardHtml;
 };
 
-const gameBoardHtml = document.querySelector(".game-border");
-const board = createBoard(10, 10);
+// function setSizeBorder(){
+//
+// }
+
+heightBoard = heightBoardInput.value
+widthBoard = widthBoardInput.value
+
+console.log("height: ",heightBoard, "width: ", widthBoard)
+
+// heightBoardInput.addEventListener("change", (event) =>{
+//     createBoard(heightBoard, widthBoard);
+//     gameBoardHtml.appendChild(board);
+//     console.log("xxx")
+// })
+
+function setDelay(){
+    delayTime = delayTimeInput.value
+}
+
+
+
+const board = createBoard(heightBoard, widthBoard);
 gameBoardHtml.appendChild(board);
 
 const cards = document.querySelectorAll('.dead');
@@ -42,11 +71,6 @@ function clickCard(element) {
     }
 }
 
-// function setDelay(){
-//
-// }
-
-
 function startGame() {
     buttonStart.style.display= "none"
     buttonEnd.style.display= "block"
@@ -65,6 +89,7 @@ function startGame() {
         let number6 = `[data-row="${numberRow+1}"][data-cell="${numberCell-1}"]`
         let number7 = `[data-row="${numberRow+1}"][data-cell="${numberCell}"]`
         let number8 = `[data-row="${numberRow+1}"][data-cell="${numberCell+1}"]`
+
         // for (let i = 1; i <= 8; i++) {
         //     let element = number${i}
         //     let checkingCard = document.querySelector(element);
@@ -126,7 +151,7 @@ function startGame() {
     cardToBeDead.forEach(card => {
         card.classList.replace("alive","dead" )
     })
-    setTimeout(startGame,1000);
+    setTimeout(startGame,delayTime);
 }
 
 // function endGame() {
@@ -136,8 +161,7 @@ function startGame() {
 
 
 
-
-
+delayTimeInput.addEventListener("change", setDelay);
 cards.forEach(card => {
     card.addEventListener('click', clickCard);
 });
