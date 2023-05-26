@@ -1,11 +1,15 @@
+body{
+    background-color: #e3d283;
+}
+
 .button-start, .button-end{
     width: 300px;
     box-sizing: border-box;
     background-color: transparent;
-    border: 2px solid gray;
+    border: 2px solid #000000;
     border-radius: 10px;
     color: gray;
-    cursor: pointer;
+    /*cursor: pointer;*/
     font-size: 16px;
     line-height: 1;
     margin: 20px;
@@ -15,26 +19,41 @@
     font-weight: 700;
 }
 .button-start a, .button-end a{
-    color: gray;
+    color: #000000;
     text-decoration: none;
 }
 .button-start:hover a, .button-end:hover a {
-    color: #fff;
+    color: #000000;
     outline: 0;
 }
 .first {
     transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
 }
 .first:hover {
-    box-shadow: 0 0 40px 40px gray inset;
+    box-shadow: 0 0 40px 40px white inset;
 }
 
 .delay_form p, .size_form p{
+
     display: inline-block;
-    font-size: 22px;
+    font-size: 20px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     color: black;
+}
+
+ .borderWidth, .borderHeight, .delay_time {
+     width: 50px;
+    display: inline-block;
+    margin: 0 auto 0 auto;
+    height: 30px;
+    border-radius: 20px;
+    border: 2px white;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    color: #000000;
+    font-weight: 700;
 }
 
 .row{

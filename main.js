@@ -1,27 +1,27 @@
-const heightBoardInput = document.querySelector('.borderHeight')
-const widthBoardInput = document.querySelector('.borderWidth')
+const rowBoardInput = document.querySelector('.borderHeight')
+const columnBoardInput = document.querySelector('.borderWidth')
 const delayTimeInput = document.querySelector('.delay_time')
 const gameBoardHtml = document.querySelector(".game-border");
 const buttonStart = document.querySelector('.button-start');
 const buttonEnd = document.querySelector('.button-end');
 
 let aliveCell;
-let heightBoard = heightBoardInput.value;
-let widthBoard = widthBoardInput.value;
+let rowBoard = rowBoardInput.value;
+let columnBoard = columnBoardInput.value;
 let board;
 let delayTime =delayTimeInput.value;
 let playCellBox;
 let stillPLay;
 
 
-const createBoard = (rows, cells) => {
+const createBoard = (rows, columns) => {
     const boardHtml = document.createElement("div");
     boardHtml.classList.add("board");
     for (let i = 1; i <= rows; i++) {
-        // row cells
+        // row columns
         const row = document.createElement("div");
         row.classList.add("row");
-        for (let j = 1; j <= cells; j++) {
+        for (let j = 1; j <= columns; j++) {
             const cell = document.createElement("div");
             cell.setAttribute("data-row", i);
             cell.setAttribute("data-cell", j);
@@ -33,15 +33,15 @@ const createBoard = (rows, cells) => {
     return boardHtml;
 };
 
-board = createBoard(heightBoard, widthBoard);
+board = createBoard(rowBoard, columnBoard);
 gameBoardHtml.appendChild(board);
 function setSizeBorder(){
     const element = document.querySelector(".board");
     element.remove()
-    heightBoard = heightBoardInput.value
-    widthBoard = widthBoardInput.value
-    console.log("height: ",heightBoard, "width: ", widthBoard)
-    board = createBoard(heightBoard, widthBoard);
+    rowBoard = rowBoardInput.value
+    columnBoard = columnBoardInput.value
+    console.log("height: ",rowBoard, "width: ", columnBoard)
+    board = createBoard(rowBoard, columnBoard);
     gameBoardHtml.appendChild(board);
     endGame();
 }
@@ -150,6 +150,9 @@ function playGame(){
         cardToBeDead.forEach(card => {
             card.classList.replace("alive", "dead")
         })
+        if (cardToBeAlive.length === 0){
+            endGame()
+        }
         setTimeout(playGame, delayTime);
     }
 }
@@ -169,8 +172,8 @@ delayTimeInput.addEventListener("change", setDelay);
 cards.forEach(card => {
     card.addEventListener('click', clickCard);
 });
-heightBoardInput.addEventListener("change", setSizeBorder);
-widthBoardInput.addEventListener("change", setSizeBorder)
+rowBoardInput.addEventListener("change", setSizeBorder);
+columnBoardInput.addEventListener("change", setSizeBorder)
 buttonStart.addEventListener('click', startGame);
 buttonEnd.addEventListener('click', endGame);
 
