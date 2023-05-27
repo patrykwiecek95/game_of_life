@@ -9,7 +9,7 @@ let aliveCell;
 let rowBoard = rowBoardInput.value;
 let columnBoard = columnBoardInput.value;
 let board;
-let delayTime =delayTimeInput.value;
+let delayTime =1000/delayTimeInput.value;
 let playCellBox;
 let stillPLay;
 let cards;
@@ -43,10 +43,8 @@ function setSizeBorder(){
         card.addEventListener('click', clickCard);
     });
 }
-
-
 function setDelay(){
-    delayTime = delayTimeInput.value
+    delayTime = 1000/delayTimeInput.value
 }
 function clickCard(element) {
     console.log("clickCard")
@@ -59,7 +57,6 @@ function clickCard(element) {
         aliveCell.classList.replace("dead", "alive");
     }
 }
-
 function startGame() {
         stillPLay =true;
         buttonStart.style.display = "none"
@@ -152,7 +149,7 @@ function playGame(){
             stillPLay =false;
             endGame()
         }
-        setTimeout(playGame, delayTime);
+        setTimeout(playGame, 100);
     }
 }
 function endGame() {
