@@ -1,18 +1,29 @@
 body{
+    position: relative;
+}
+
+.game{
+    position: absolute;
     background-color: #e3d283;
+    padding: 10px;
+    left: 50%;
+    translate: -50% 0;
+    border: 2px black solid;
+
 }
 
 .button-start, .button-end{
-    width: 300px;
+    align-items: center;
+    justify-content: center;
+    /*width: 200px;*/
     box-sizing: border-box;
     background-color: transparent;
     border: 2px solid #000000;
     border-radius: 10px;
     color: gray;
-    /*cursor: pointer;*/
     font-size: 16px;
     line-height: 1;
-    margin: 20px;
+    margin: 10px;
     padding: 1.2em 2.8em;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
@@ -33,14 +44,20 @@ body{
     box-shadow: 0 0 40px 40px white inset;
 }
 
-.delay_form p, .size_form p{
-
-    display: inline-block;
-    font-size: 20px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    color: black;
+.size_form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 450px;
 }
+
+.size_form p{
+     display: inline-block;
+     font-size: 20px;
+     font-family: 'Montserrat', sans-serif;
+     font-weight: 700;
+     color: black;
+ }
 
  .borderWidth, .borderHeight, .delay_time {
      width: 50px;
@@ -56,18 +73,25 @@ body{
     font-weight: 700;
 }
 
+ .game-border{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     margin-bottom: 10px;
+ }
+
 .row{
     display: flex;
 }
 
 .dead {
-    border: white 2px solid;
+    border: white 1px solid;
     height: 20px;
     width: 20px;
     background-color: gray;
 }
 .alive{
-    border: white 2px solid;
+    border: white 1px solid;
     height: 20px;
     width: 20px;
     background-color: aqua;

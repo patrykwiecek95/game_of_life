@@ -43,13 +43,15 @@ function setSizeBorder(){
     console.log("height: ",rowBoard, "width: ", columnBoard)
     board = createBoard(rowBoard, columnBoard);
     gameBoardHtml.appendChild(board);
-    endGame();
+    console.log("cards!!!!!!!!!!!!",cards)
+    // endGame();
+
 }
 function setDelay(){
     delayTime = delayTimeInput.value
 }
 
-const cards = document.querySelectorAll('.dead');
+
 
 function clickCard(element) {
     aliveCell = this;
@@ -61,6 +63,8 @@ function clickCard(element) {
         aliveCell.classList.replace("dead", "alive");
     }
 }
+
+const cards = document.querySelectorAll('.dead');
 function startGame() {
         stillPLay =true;
         buttonStart.style.display = "none"
@@ -151,6 +155,7 @@ function playGame(){
             card.classList.replace("alive", "dead")
         })
         if (cardToBeAlive.length === 0){
+            stillPLay =false;
             endGame()
         }
         setTimeout(playGame, delayTime);
@@ -159,6 +164,7 @@ function playGame(){
 function endGame() {
     stillPLay = false;
     console.log("end game")
+    // playCellBox = [...cards]
     buttonStart.style.display= "block"
     buttonEnd.style.display= "none"
     console.log(playCellBox)
