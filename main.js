@@ -12,10 +12,11 @@ let board;
 let delayTime =delayTimeInput.value;
 let playCellBox;
 let stillPLay;
-
+let cards;
 
 const createBoard = (rows, columns) => {
     const boardHtml = document.createElement("div");
+    gameBoardHtml.innerHTML = ""
     boardHtml.classList.add("board");
     for (let i = 1; i <= rows; i++) {
         // row columns
@@ -30,30 +31,25 @@ const createBoard = (rows, columns) => {
         }
         boardHtml.appendChild(row);
     }
-    return boardHtml;
+    gameBoardHtml.appendChild(boardHtml);
 };
 
-board = createBoard(rowBoard, columnBoard);
-gameBoardHtml.appendChild(board);
 function setSizeBorder(){
-    const element = document.querySelector(".board");
-    element.remove()
     rowBoard = rowBoardInput.value
     columnBoard = columnBoardInput.value
-    console.log("height: ",rowBoard, "width: ", columnBoard)
-    board = createBoard(rowBoard, columnBoard);
-    gameBoardHtml.appendChild(board);
-    console.log("cards!!!!!!!!!!!!",cards)
-    // endGame();
-
+    createBoard(rowBoard, columnBoard);
+    cards = document.querySelectorAll('.dead');
+    cards.forEach(card => {
+        card.addEventListener('click', clickCard);
+    });
 }
+
+
 function setDelay(){
     delayTime = delayTimeInput.value
 }
-
-
-
 function clickCard(element) {
+    console.log("clickCard")
     aliveCell = this;
     if(aliveCell.className === "alive"){
         aliveCell.classList.replace("alive", "dead");
@@ -64,14 +60,12 @@ function clickCard(element) {
     }
 }
 
-const cards = document.querySelectorAll('.dead');
 function startGame() {
         stillPLay =true;
         buttonStart.style.display = "none"
         buttonEnd.style.display = "block"
         playGame()
 }
-
 function playGame(){
     if(stillPLay) {
         playCellBox = [...cards]
@@ -164,7 +158,6 @@ function playGame(){
 function endGame() {
     stillPLay = false;
     console.log("end game")
-    // playCellBox = [...cards]
     buttonStart.style.display= "block"
     buttonEnd.style.display= "none"
     console.log(playCellBox)
@@ -173,6 +166,16 @@ function endGame() {
     })
     console.log(playCellBox)
 }
+
+
+createBoard(rowBoard, columnBoard)
+cards = document.querySelectorAll('.dead');
+// function init(){
+//
+// }
+// window.onload = init
+
+
 
 delayTimeInput.addEventListener("change", setDelay);
 cards.forEach(card => {
