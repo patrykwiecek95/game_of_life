@@ -43,6 +43,8 @@ function setSizeBorder(){
         card.addEventListener('click', clickCard);
     });
 }
+
+
 function setDelay(){
     delayTime = 1000/delayTimeInput.value
 }
@@ -72,72 +74,29 @@ function playGame(){
             let score = 0;
             const numberRow = parseInt(card.dataset.row);
             const numberCell = parseInt(card.dataset.cell);
-            let number1 = `[data-row="${numberRow - 1}"][data-cell="${numberCell - 1}"]`;
-            let number2 = `[data-row="${numberRow - 1}"][data-cell="${numberCell}"]`;
-            let number3 = `[data-row="${numberRow - 1}"][data-cell="${numberCell + 1}"]`;
-            let number4 = `[data-row="${numberRow}"][data-cell="${numberCell - 1}"]`;
-            let number5 = `[data-row="${numberRow}"][data-cell="${numberCell + 1}"]`;
-            let number6 = `[data-row="${numberRow + 1}"][data-cell="${numberCell - 1}"]`
-            let number7 = `[data-row="${numberRow + 1}"][data-cell="${numberCell}"]`
-            let number8 = `[data-row="${numberRow + 1}"][data-cell="${numberCell + 1}"]`
+            const directions = [
+                { row: numberRow - 1, cell: numberCell - 1 },
+                { row: numberRow - 1, cell: numberCell },
+                { row: numberRow - 1, cell: numberCell + 1 },
+                { row: numberRow, cell: numberCell - 1 },
+                { row: numberRow, cell: numberCell + 1 },
+                { row: numberRow + 1, cell: numberCell - 1 },
+                { row: numberRow + 1, cell: numberCell },
+                { row: numberRow + 1, cell: numberCell + 1 }
+            ];
+            directions.forEach(direction => {
+                const { row, cell } = direction;
+                const neighbor = document.querySelector(`[data-row="${row}"][data-cell="${cell}"]`);
+                if (neighbor && neighbor.classList.contains("alive")) {
+                    score++;
+                }
+            });
 
-            //-------------------------------------------------------------------------
-            // make it simpler
-            // for (let i = 1; i <= 8; i++) {
-            //     let element = number${i}
-            //     let checkingCard = document.querySelector(element);
-            //     console.log("checking card:",checkingCard)
-            //     let card1 = document.querySelector(number1);
-            //     console.log("card1:",card1)
-            //     if (checkingCard && checkingCard.className === "alive") {
-            //         score += 1;
-            //     }
-            // }
-            // if ((card.className === "alive" && score >= 2 && score <= 3) || (card.className === "dead" && score === 3)) {
-            //     cardToBeAlive.push(card);
-            // } else {
-            //     cardToBeDead.push(card);
-            // }
-            //-------------------------------------------------------------------------
-
-            let card1 = document.querySelector(number1);
-            let card2 = document.querySelector(number2);
-            let card3 = document.querySelector(number3);
-            let card4 = document.querySelector(number4);
-            let card5 = document.querySelector(number5);
-            let card6 = document.querySelector(number6);
-            let card7 = document.querySelector(number7);
-            let card8 = document.querySelector(number8);
-
-            if (card1 && card1.className === "alive") {
-                score += 1;
-            }
-            if (card2 && card2.className === "alive") {
-                score += 1;
-            }
-            if (card3 && card3.className === "alive") {
-                score += 1;
-            }
-            if (card4 && card4.className === "alive") {
-                score += 1;
-            }
-            if (card5 && card5.className === "alive") {
-                score += 1;
-            }
-            if (card6 && card6.className === "alive") {
-                score += 1;
-            }
-            if (card7 && card7.className === "alive") {
-                score += 1;
-            }
-            if (card8 && card8.className === "alive") {
-                score += 1;
-            }
-            if ((card.className === "alive" && score >= 2 && score <= 3) || (card.className === "dead" && score === 3)) {
-                cardToBeAlive.push(card)
+            if ((card.classList.contains("alive") && score >= 2 && score <= 3) || (card.classList.contains("dead") && score === 3)) {
+                cardToBeAlive.push(card);
             } else {
-                cardToBeDead.push(card)
-            }
+                cardToBeDead.push(card)}
+
         })
         cardToBeAlive.forEach(card => {
             card.classList.replace("dead", "alive")
@@ -149,7 +108,7 @@ function playGame(){
             stillPLay =false;
             endGame()
         }
-        setTimeout(playGame, 100);
+        setTimeout(playGame, delayTime);
     }
 }
 function endGame() {
@@ -167,10 +126,7 @@ function endGame() {
 
 createBoard(rowBoard, columnBoard)
 cards = document.querySelectorAll('.dead');
-// function init(){
-//
-// }
-// window.onload = init
+
 
 
 
