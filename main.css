@@ -10,10 +10,14 @@ body{
     translate: -50% 0;
     border: 2px black solid;
     border-radius: 10px;
-
 }
 
-.button-start, .button-end{
+.panel{
+    display: flex;
+}
+
+.button-start, .button-end, .button-clear{
+    /*display: flex;*/
     margin-left: auto;
     margin-right: auto;
     box-sizing: border-box;
@@ -29,11 +33,11 @@ body{
     font-weight: 700;
     width: 200px;
 }
-.button-start a, .button-end a{
+.button-start a, .button-end a, .button-clear a {
     color: #000000;
     text-decoration: none;
 }
-.button-start:hover a, .button-end:hover a {
+.button-start:hover a, .button-end:hover a, .button-clear:hover a{
     color: #000000;
     outline: 0;
 }

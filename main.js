@@ -4,6 +4,7 @@ const delayTimeInput = document.querySelector('.delay_time')
 const gameBoardHtml = document.querySelector(".game-border");
 const buttonStart = document.querySelector('.button-start');
 const buttonEnd = document.querySelector('.button-end');
+const buttonClear = document.querySelector('.button-clear');
 
 let aliveCell;
 let rowBoard = rowBoardInput.value;
@@ -65,64 +66,96 @@ function startGame() {
         buttonEnd.style.display = "block"
         playGame()
 }
-function playGame(){
-    if(stillPLay) {
-        playCellBox = [...cards]
-        const cardToBeAlive = []
-        const cardToBeDead = []
-        playCellBox.forEach(card => {
-            let score = 0;
-            const numberRow = parseInt(card.dataset.row);
-            const numberCell = parseInt(card.dataset.cell);
+function playGame() {
+    if (!stillPLay) {
+        return;
+    }
+    playCellBox = [...cards]
+    const cardToBeAlive = []
+    const cardToBeDead = []
+    let score = 0
+    const newArray = [];
+    let currentRow = [];
+    for (let i = 0; i < playCellBox.length; i++) {
+        currentRow.push([
+            playCellBox[i].dataset.row,
+            playCellBox[i].dataset.cell,
+            playCellBox[i].classList.value
+        ]);
+        if (currentRow.length === parseInt(columnBoard)) {
+            newArray.push(currentRow);
+            currentRow = [];
+        }
+    }
+    for (let i = 0; i < newArray.length; i++) {
+        for (let j = 0; j < newArray[i].length; j++) {
+            const status = newArray[i][j][2]
             const directions = [
-                { row: numberRow - 1, cell: numberCell - 1 },
-                { row: numberRow - 1, cell: numberCell },
-                { row: numberRow - 1, cell: numberCell + 1 },
-                { row: numberRow, cell: numberCell - 1 },
-                { row: numberRow, cell: numberCell + 1 },
-                { row: numberRow + 1, cell: numberCell - 1 },
-                { row: numberRow + 1, cell: numberCell },
-                { row: numberRow + 1, cell: numberCell + 1 }
+                { row: i - 1, cell: j - 1 },
+                { row: i - 1, cell: j },
+                { row: i - 1, cell: j + 1 },
+                { row: i, cell: j - 1 },
+                { row: i, cell: j + 1 },
+                { row: i + 1, cell: j - 1 },
+                { row: i + 1, cell: j },
+                { row: i + 1, cell: j + 1 }
             ];
             directions.forEach(direction => {
                 const { row, cell } = direction;
-                const neighbor = document.querySelector(`[data-row="${row}"][data-cell="${cell}"]`);
-                if (neighbor && neighbor.classList.contains("alive")) {
+                if (newArray[row] && newArray[row][cell] && newArray[row][cell][2] === "alive") {
+                    console.log("zyjąca komórka",newArray[row][cell])
                     score++;
                 }
+                if (!(newArray[row] && newArray[row][cell])) {
+                    console.log("komórka nie istnieje",row,cell)
+                }
             });
-
-            if ((card.classList.contains("alive") && score >= 2 && score <= 3) || (card.classList.contains("dead") && score === 3)) {
-                cardToBeAlive.push(card);
+            console.log("wynik:", score)
+            if ((status === "alive" && score >= 2 && score <= 3) || (status === "dead" && score === 3)) {
+                cardToBeAlive.push(newArray[i][j]);
             } else {
-                cardToBeDead.push(card)}
-
-        })
-        cardToBeAlive.forEach(card => {
-            card.classList.replace("dead", "alive")
-        })
-        cardToBeDead.forEach(card => {
-            card.classList.replace("alive", "dead")
-        })
-        if (cardToBeAlive.length === 0){
-            stillPLay =false;
-            endGame()
+                cardToBeDead.push(newArray[i][j])
+            }
+            score = 0;
         }
-        setTimeout(playGame, delayTime);
+
     }
+
+    console.log("cardtobealive",cardToBeAlive)
+    console.log("cardtobeadeath",cardToBeDead)
+
+    cardToBeAlive.forEach(card => {
+        let testcard = document.querySelector(`[data-row="${card[0]}"][data-cell="${card[1]}"]`)
+        // console.log("testcard:",testcard)
+        testcard.classList.replace("dead", "alive")
+    })
+    cardToBeDead.forEach(card => {
+        let testcardx = document.querySelector(`[data-row="${card[0]}"][data-cell="${card[1]}"]`)
+        testcardx.classList.replace("alive", "dead")
+    })
+    if (cardToBeAlive.length === 0) {
+        stillPLay = false;
+        endGame()
+    }
+    setTimeout(playGame, delayTime);
 }
+
+
 function endGame() {
     stillPLay = false;
     console.log("end game")
     buttonStart.style.display= "block"
     buttonEnd.style.display= "none"
-    console.log(playCellBox)
     playCellBox.forEach(cell =>{
         cell.classList.replace("alive", "dead");
     })
-    console.log(playCellBox)
 }
 
+function clearGame(){
+    cards.forEach(cell =>{
+        cell.classList.replace("alive", "dead");
+    })
+}
 
 createBoard(rowBoard, columnBoard)
 cards = document.querySelectorAll('.dead');
@@ -138,5 +171,6 @@ rowBoardInput.addEventListener("change", setSizeBorder);
 columnBoardInput.addEventListener("change", setSizeBorder)
 buttonStart.addEventListener('click', startGame);
 buttonEnd.addEventListener('click', endGame);
+buttonClear.addEventListener('click', clearGame);
 
 
